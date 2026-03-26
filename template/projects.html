@@ -1,0 +1,143 @@
+<!doctype html>
+{% extends "base.html" %}
+{% block projectsactive %}active{% endblock %}
+{% block body %}
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<title>Projects</title>
+
+<style>
+body{
+ margin:0;
+ overflow-x:hidden;
+ background:#020617;
+}
+
+/* background canvas */
+#bg{
+ position:fixed;
+ top:0;
+ left:0;
+ width:100%;
+ height:100%;
+ z-index:-1;
+}
+</style>
+</head>
+
+<body class="p-0 m-0 border-0 bd-example m-0 border-0">
+
+<canvas id="bg"></canvas>
+
+<div class="container my-3">
+<h2 class="text-center my-3 py-3 text-white">Projects</h2>
+
+<div class="row mt-4 ">
+
+<div class="col-md-4">
+<div class="card" style="width:18rem;">
+<img src="https://w0.peakpx.com/wallpaper/577/287/HD-wallpaper-blackjack-gambling-poker-21-chips-poker-chips.jpg" class="card-img-top">
+<div class="card-body p-5">
+<h5>Blackjack game</h5>
+<p>This project is a simple Python card game where you play against the computer. It gives you random cards and calculates your score while letting you choose whether to draw more cards or stop. If your total goes over 25, you lose. After your turn, the computer reveals its cards, compares scores, and decides the winner.</p>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 g-4">
+<div class="card" style="width:18rem;">
+<img src="https://cdn-media-1.freecodecamp.org/images/0*tuogeHoQ53SQACY-.png" class="card-img-top" style="height:150px;object-fit:cover;">
+<div class="card-body  p-5">
+<h5>Caesar cipher</h5>
+<p>This project is a Python program that works as a Caesar cipher tool. It takes a message and a shift number from the user, then shifts each letter forward or backward in the alphabet to encrypt or decrypt the text. It works by finding each letter’s position, changing it using the shift value, and printing the new message.</p>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 g-4">
+<div class="card" style="width:18rem;">
+<img src="https://thumbs.dreamstime.com/b/auctioneer-hold-gavel-hand-buyers-raising-arm-holding-bid-paddles-numbers-price-auction-bidding-vector-competitive-119160732.jpg" class="card-img-top" style="height:150px;object-fit:cover;">
+<div class="card-body p-5">
+<h5>Bidding auction</h5>
+<p>This project is a Python bidding system that finds the highest bidder. It takes names and bid amounts from multiple users and stores them in a dictionary. The program keeps asking for new bidders until no one is left. Then it checks all bids, compares them, and prints the winner with the highest bid.</p>
+</div>
+</div>
+</div>
+
+    <div class="row mt-2 ">
+<div class="col-md-4 g-4">
+<div class="card" style="width:18rem;">
+<img src="https://cdn.prod.website-files.com/6217276e3ff49f8665de4572/65f1416dbc53862a51a15049_Screenshot%202024-03-13%20at%2011.29.44%20AM.png" class="card-img-top" style="height:150px;object-fit:cover;">
+<div class="card-body p-5">
+<h5>Followers guessing game</h5>
+<p>This project is a simple Python game where players guess which famous person has more Instagram followers. It shows two personalities with their details, lets the user choose A or B, and keeps track of the score until a wrong answer ends the game. </p>
+</div>
+</div>
+</div>
+
+<div class="col-md-4 g-4">
+<div class="card" style="width:18rem;">
+<img src="https://www.funbrain.com/assets/img/content-cards/games%2Fguess_the_number.png" class="card-img-top" style="height:150px;object-fit:cover;">
+<div class="card-body">
+<h5>Number guessing game</h5>
+<p>This project is a number guessing game where the computer selects a random number between 1 and 100 and the player has to guess it within limited attempts based on the chosen difficulty. The game gives hints like too high or too low after each guess and ends when the player wins or runs out of chances.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
+
+const renderer=new THREE.WebGLRenderer({
+canvas:document.getElementById("bg"),
+alpha:true
+});
+renderer.setSize(window.innerWidth,window.innerHeight);
+
+camera.position.z=5;
+
+/* particles */
+const particlesCount=2000;
+const positions=new Float32Array(particlesCount*3);
+
+for(let i=0;i<particlesCount*3;i++){
+positions[i]=(Math.random()-0.5)*25;
+}
+
+const geometry=new THREE.BufferGeometry();
+geometry.setAttribute("position",new THREE.BufferAttribute(positions,3));
+
+const material=new THREE.PointsMaterial({
+color:0x00ffff,
+size:0.05
+});
+
+const particles=new THREE.Points(geometry,material);
+scene.add(particles);
+
+/* animation */
+function animate(){
+requestAnimationFrame(animate);
+particles.rotation.y+=0.0008;
+particles.rotation.x+=0.0003;
+renderer.render(scene,camera);
+}
+animate();
+
+/* resize fix */
+window.addEventListener("resize",()=>{
+camera.aspect=window.innerWidth/window.innerHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(window.innerWidth,window.innerHeight);
+});
+</script>
+{% endblock body %}
+</body>
+</html>
