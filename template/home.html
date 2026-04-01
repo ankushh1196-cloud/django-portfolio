@@ -1,159 +1,37 @@
-<!doctype html>
-<html lang="en">
-<head>
+{% extends "base.html" %}
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+{% block homeactive %}active{% endblock %}
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
-<title>Home</title>
+{% block body %}
 
 <style>
 body{
  margin:0;
- overflow:hidden;
- font-family:Arial, sans-serif;
  background:#0d1117;
 }
 
-/* particles background */
-#particles-js{
- position:fixed;
- width:100%;
- height:100%;
- top:0;
- left:0;
- z-index:-1;
-}
-
-/* navbar above background */
-.navbar{
- z-index:2;
- position:relative;
-}
-
-/* centered hero text */
-.hero-text{
- position:absolute;
- top:50%;
- left:50%;
- transform:translate(-50%,-50%);
+/* center but slightly top */
+.hero{
+ height:80vh; /* reduced so it moves up */
+ display:flex;
+ justify-content:center;
+ align-items:flex-start; /* 🔥 moves text upward */
+ padding-top:100px; /* adjust this if needed */
  text-align:center;
- z-index:2;
- animation:fadeIn 2s ease forwards;
+ color:white;
 }
 
-/* main title */
+/* heading style */
 .title{
- font-size:clamp(40px,7vw,90px);
- font-weight:800;
- background:linear-gradient(90deg,#00f0ff,#00ff9d,#00f0ff);
- background-size:200% auto;
- color:transparent;
- -webkit-background-clip:text;
- background-clip:text;
- animation:shine 6s linear infinite;
- text-shadow:0 0 20px rgba(0,255,255,0.4);
-}
-
-/* subtitle */
-.subtitle{
- color:#cfcfcf;
- font-size:clamp(16px,2vw,24px);
- letter-spacing:3px;
- margin-top:10px;
- opacity:0.85;
-}
-
-/* animations */
-@keyframes shine{
- to{ background-position:200% center; }
-}
-
-@keyframes fadeIn{
- from{
-  opacity:0;
-  transform:translate(-50%,-30%);
- }
- to{
-  opacity:1;
-  transform:translate(-50%,-50%);
- }
+ font-size:clamp(35px,6vw,70px);
+ font-weight:900;
+ font-family: 'Segoe UI', sans-serif;
+ letter-spacing: 0.5px;
 }
 </style>
 
-</head>
-
-<body>
-
-<div id="particles-js"></div>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-<div class="container-fluid">
-
-<a class="navbar-brand" href="/home">Ankush's Portfolio</a>
-
-<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-<span class="navbar-toggler-icon"></span>
-</button>
-
-<div class="collapse navbar-collapse" id="nav">
-
-<ul class="navbar-nav me-auto">
-
-<li class="nav-item">
-<a class="nav-link {% block homeactive %}{% endblock %}" href="/home">Home</a>
-</li>
-
-<li class="nav-item">
-<a class="nav-link {% block projectsactive %}{% endblock %}" href="/project">Projects</a>
-</li>
-
-<li class="nav-item">
-<a class="nav-link {% block aboutactive %}{% endblock %}" href="/about">About</a>
-</li>
-
-<li class="nav-item">
-<a class="nav-link {% block contactactive %}{% endblock %}" href="/contact">Contact</a>
-</li>
-
-</ul>
-</div>
-</div>
-</nav>
-
-<div class="hero-text">
-<h1 class="title">Welcome to my Portfolio Website</h1>
-<p class="subtitle"></p>
+<div class="hero">
+  <h1 class="title">Welcome to Ankush's Portfolio</h1>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-
-<script>
-particlesJS("particles-js",{
-particles:{
-number:{value:100},
-color:{value:"#ffffff"},
-shape:{type:"circle"},
-opacity:{value:0.5},
-size:{value:3},
-line_linked:{
-enable:true,
-distance:150,
-color:"#ffffff",
-opacity:0.4,
-width:1
-},
-move:{enable:true,speed:2}
-},
-interactivity:{
-events:{onhover:{enable:true,mode:"grab"}},
-modes:{grab:{distance:140,line_linked:{opacity:0.5}}}
-}
-});
-</script>
-
-</body>
-</html>
+{% endblock %}
